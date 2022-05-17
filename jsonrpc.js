@@ -1,5 +1,11 @@
 import { JSONRPCClient } from "json-rpc-2.0";
 
+let url =
+  process.env.NODE_ENV == "production"
+    ? "https://datazm412.herokuapp.com/json-rpc"
+    : "http://localhost:3000/json-rpc";
+console.log(url, "url");
+
 export class ClientForms {
   constructor(url) {
     this.url = url;
@@ -7,7 +13,7 @@ export class ClientForms {
 
   getClient(url) {
     const client = new JSONRPCClient((jsonRPCRequest) =>
-      fetch("https://datazm412.herokuapp.com/json-rpc", {
+      fetch(url, {
         method: "POST",
         headers: {
           "content-type": "application/json",
