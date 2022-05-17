@@ -7,7 +7,7 @@ export class ClientForms {
 
   getClient(url) {
     const client = new JSONRPCClient((jsonRPCRequest) =>
-      fetch("http://127.0.0.1:8000/json-rpc", {
+      fetch("https://datazm412.herokuapp.com/json-rpc", {
         method: "POST",
         headers: {
           "content-type": "application/json",
