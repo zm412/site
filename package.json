@@ -23,7 +23,6 @@
   "devDependencies": {
     "concurrently": "^7.2.0",
     "css-loader": "^6.7.1",
-    "html-webpack-plugin": "^5.5.0",
     "nodemon": "^2.0.16",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
