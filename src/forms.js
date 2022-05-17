@@ -1,10 +1,16 @@
 const { JSONRPCClient } = require("json-rpc-2.0");
 const { ClientForms } = require("../jsonrpc.js");
 
-let client = new ClientForms("http://127.0.0.1:8000/json-rpc/");
+let url =
+  process.env.NODE_ENV == "production"
+    ? "https://datazm412.herokuapp.com/json-rpc"
+    : "http://localhost:3000/json-rpc";
+console.log(url, "url");
+
+let client = new ClientForms(url);
+
 document.addEventListener("DOMContentLoaded", function () {
   if (document.querySelector("#forms_list")) {
-    let client = new ClientForms("http://127.0.0.1:8000/json-rpc/");
     client.getForms(createList);
   }
 });

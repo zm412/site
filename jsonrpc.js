@@ -1,19 +1,13 @@
 import { JSONRPCClient } from "json-rpc-2.0";
 
-let url =
-  process.env.NODE_ENV == "production"
-    ? "https://datazm412.herokuapp.com/json-rpc"
-    : "http://localhost:3000/json-rpc";
-console.log(url, "url");
-
 export class ClientForms {
   constructor(url) {
     this.url = url;
   }
 
-  getClient(url) {
+  getClient() {
     const client = new JSONRPCClient((jsonRPCRequest) =>
-      fetch(url, {
+      fetch(this.url, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -33,7 +27,7 @@ export class ClientForms {
   }
 
   getForm(id, func) {
-    return this.getClient(this.url)
+    return this.getClient()
       .request("get_form", id)
       .then((result) => {
         console.log(result, "result");
@@ -42,7 +36,7 @@ export class ClientForms {
   }
 
   getForms(func) {
-    return this.getClient(this.url)
+    return this.getClient()
       .request("get_forms")
       .then((result) => {
         func(result);
@@ -53,7 +47,7 @@ export class ClientForms {
 
   saveFormInst(obj) {
     console.log(obj, "newobj");
-    return this.getClient(this.url)
+    return this.getClient()
       .request("save_form_inst", obj)
       .then((result) => {
         console.log(result, "result");
@@ -61,7 +55,7 @@ export class ClientForms {
   }
 
   getFormInst(id) {
-    return this.getClient(this.url)
+    return this.getClient()
       .request("get_form_inst", id)
       .then((result) => {
         console.log(result, "result");
