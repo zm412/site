@@ -6,12 +6,16 @@ export class ClientForms {
   }
 
   getClient() {
+    let headers = new Headers();
+
+    headers.append("Content-Type", "application/json");
+    headers.append("Accept", "application/json");
+    headers.append("Origin", "https://sitezm412.herokuapp.com");
+
     const client = new JSONRPCClient((jsonRPCRequest) =>
       fetch(this.url, {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
+        headers: headers,
         body: JSON.stringify(jsonRPCRequest),
       }).then((response) => {
         if (response.status === 200) {
