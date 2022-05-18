@@ -1,5 +1,5 @@
 const { JSONRPCClient } = require("json-rpc-2.0");
-const { ClientForms } = require("../jsonrpc.js");
+const { ClientForms } = require("../jsonrpc_client.js");
 
 let url =
   process.env.NODE_ENV == "production"

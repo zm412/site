@@ -1,4 +1,4 @@
-const { ClientForms } = require("../jsonrpc.js");
+const { ClientForms } = require("../jsonrpc_client.js");
 
 let url =
   process.env.NODE_ENV == "production"
@@ -67,8 +67,12 @@ function create_form(obj) {
 function showFormInst(obj) {
   console.log(obj, "objIIII");
   let par = document.querySelector("#form_inst_created");
+  let newdate = new Date(obj.created);
+  let newStr =
+    newdate.toLocaleDateString() + ", " + newdate.toLocaleTimeString();
+
   par.innerHTML = "";
-  let strhtml = ` <h1>Date: ${obj.created}</h1> `;
+  let strhtml = ` <h4>Date: ${newStr}</h4> `;
   let newPart = obj.answers
     ? "<ul>" +
       obj.answers.reduce(
