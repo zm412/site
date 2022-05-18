@@ -19,7 +19,6 @@ export class ClientForms {
         body: JSON.stringify(jsonRPCRequest),
       })
         .then((response) => {
-          console.log(response, "response");
           if (response.status === 200) {
             return response
               .json()
@@ -37,7 +36,6 @@ export class ClientForms {
     return this.getClient()
       .request("get_form", id)
       .then((result) => {
-        console.log(result, "result");
         func(result);
       });
   }
@@ -47,7 +45,6 @@ export class ClientForms {
       .request("get_forms")
       .then((result) => {
         func(result);
-        console.log(result, "result");
       });
   }
 
@@ -56,7 +53,6 @@ export class ClientForms {
       .request("save_form_inst", obj)
       .then((result) => {
         func(result);
-        console.log(result, "resultRES");
       });
   }
 
@@ -65,7 +61,6 @@ export class ClientForms {
       .request("get_form_inst", id)
       .then((result) => {
         //func(result);
-        console.log(result, "resultKKK");
       });
   }
 }

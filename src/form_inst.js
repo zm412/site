@@ -4,7 +4,6 @@ let url =
   process.env.NODE_ENV == "production"
     ? "https://datazm412.herokuapp.com/json-rpc"
     : "http://localhost:3000/json-rpc";
-//console.log(url, "url");
 
 let client = new ClientForms(url);
 
@@ -65,7 +64,6 @@ function create_form(obj) {
 }
 
 function showFormInst(obj) {
-  console.log(obj, "objIIII");
   let par = document.querySelector("#form_inst_created");
   let newdate = new Date(obj.created);
   let newStr =

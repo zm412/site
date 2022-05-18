@@ -5,7 +5,6 @@ let url =
   process.env.NODE_ENV == "production"
     ? "https://datazm412.herokuapp.com/json-rpc"
     : "http://localhost:3000/json-rpc";
-//console.log(url, "url");
 
 let client = new ClientForms(url);
 
