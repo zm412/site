@@ -52,6 +52,7 @@ export class ClientForms {
     return this.getClient()
       .request("save_form_inst", obj)
       .then((result) => {
+        //console.log(result, "rels");
         func(result);
       });
   }

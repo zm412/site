@@ -21,12 +21,6 @@ function createEl(par, tag, inner = null) {
   return elem;
 }
 
-function collectInfo() {
-  let obj = {};
-
-  //          obj[newQuest.value].opts = [...newDiv.children].map((el) => el.value);
-}
-
 function create_form(obj) {
   let par = document.querySelector("#form_inst");
   let title = createEl(par, "h4", obj[0].form.title);
@@ -34,36 +28,39 @@ function create_form(obj) {
   form.id = "create_inst";
   form.dataset.id = obj[0].form._id;
 
-  let htmlform = obj.map((el) => {
-    let str = ``;
-    title;
-    str += `<p>${el.question} (${el.description})</p>`;
+  let str = ``;
+  title;
+  let htmlform = obj.reduce((substr, el, i) => {
+    substr += `<p>${el.question} (${el.description})</p>`;
     if (el.question_type == "input") {
-      str += `<input name=${el._id} class="quest">`;
+      substr += `<input name=${el._id} class="quest">`;
     } else if (el.question_type == "textarea") {
-      str += `<textarea name=${el._id} class="quest"></textarea>`;
+      substr += `<textarea name=${el._id} class="quest"></textarea>`;
     } else if (el.question_type == "select") {
-      str +=
+      substr +=
         `<select name=${el._id} class="quest">` +
         el.opts.reduce(
-          (str, k, i) => str + `<option value=${i}>${k}</option>`,
+          (option, k, l) => (option += `<option value=${l}>${k}</option>`),
           ""
         ) +
         "</select>";
     }
-    return str;
-  });
+    return substr;
+  }, "");
   form.innerHTML = htmlform;
 
+  let br = createEl(form, "br");
   let button_sbm = createEl(form, "button", "Send");
 
   form.onsubmit = (e) => {
     let collection = onsubmitForm(e);
     client.saveFormInst(collection, showFormInst);
+    par.innerHTML = null;
   };
 }
 
 function showFormInst(obj) {
+  console.log(obj, "obj");
   let par = document.querySelector("#form_inst_created");
   let newdate = new Date(obj.created);
   let newStr =
