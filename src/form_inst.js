@@ -4,11 +4,12 @@ let url =
   process.env.NODE_ENV == "production"
     ? "https://datazm412.herokuapp.com/json-rpc"
     : "http://localhost:3000/json-rpc";
-console.log(url, "url");
+//console.log(url, "url");
 
 let client = new ClientForms(url);
 
 document.addEventListener("DOMContentLoaded", function () {
+  client.getFormInst("628509817cf3bd218a3686dd");
   if (document.querySelector("#form_inst")) {
     let id = localStorage.getItem("show_f");
     client.getForm(id, create_form);
@@ -59,8 +60,27 @@ function create_form(obj) {
 
   form.onsubmit = (e) => {
     let collection = onsubmitForm(e);
-    client.saveFormInst(collection);
+    client.saveFormInst(collection, showFormInst);
   };
+}
+
+function showFormInst(obj) {
+  console.log(obj, "objIIII");
+  let par = document.querySelector("#form_inst_created");
+  par.innerHTML = "";
+  let strhtml = ` <h1>Date: ${obj.created}</h1> `;
+  let newPart = obj.answers
+    ? "<ul>" +
+      obj.answers.reduce(
+        (str, el) =>
+          str +
+          `<li>question: ${el.question.question}, answer: ${el.answer}</li>`,
+        ""
+      ) +
+      "</ul>"
+    : "";
+
+  par.insertAdjacentHTML("beforeend", strhtml + newPart);
 }
 
 function onsubmitForm(e) {

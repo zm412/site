@@ -10,7 +10,7 @@ export class ClientForms {
 
     headers.append("Content-Type", "application/json");
     headers.append("Accept", "application/json");
-    headers.append("Origin", "https://sitezm412.herokuapp.com");
+    headers.append("Origin", "*");
 
     const client = new JSONRPCClient((jsonRPCRequest) =>
       fetch(this.url, {
@@ -47,25 +47,25 @@ export class ClientForms {
       .request("get_forms")
       .then((result) => {
         func(result);
-
         console.log(result, "result");
       });
   }
 
-  saveFormInst(obj) {
-    console.log(obj, "newobj");
+  saveFormInst(obj, func) {
     return this.getClient()
       .request("save_form_inst", obj)
       .then((result) => {
-        console.log(result, "result");
+        func(result);
+        console.log(result, "resultRES");
       });
   }
 
-  getFormInst(id) {
+  getFormInst(id, func) {
     return this.getClient()
       .request("get_form_inst", id)
       .then((result) => {
-        console.log(result, "result");
+        //func(result);
+        console.log(result, "resultKKK");
       });
   }
 }
