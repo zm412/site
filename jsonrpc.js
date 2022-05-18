@@ -18,6 +18,7 @@ export class ClientForms {
         headers: headers,
         body: JSON.stringify(jsonRPCRequest),
       }).then((response) => {
+        console.log(response, "response");
         if (response.status === 200) {
           return response
             .json()
