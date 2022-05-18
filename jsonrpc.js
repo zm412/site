@@ -17,16 +17,18 @@ export class ClientForms {
         method: "POST",
         headers: headers,
         body: JSON.stringify(jsonRPCRequest),
-      }).then((response) => {
-        console.log(response, "response");
-        if (response.status === 200) {
-          return response
-            .json()
-            .then((jsonRPCResponse) => client.receive(jsonRPCResponse));
-        } else if (jsonRPCRequest.id !== undefined) {
-          return Promise.reject(new Error(response.statusText));
-        }
       })
+        .then((response) => {
+          console.log(response, "response");
+          if (response.status === 200) {
+            return response
+              .json()
+              .then((jsonRPCResponse) => client.receive(jsonRPCResponse));
+          } else if (jsonRPCRequest.id !== undefined) {
+            return Promise.reject(new Error(response.statusText));
+          }
+        })
+        .catch((err) => console.log(err, "err"))
     );
     return client;
   }
