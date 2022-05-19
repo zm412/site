@@ -60,26 +60,26 @@ function create_form(obj) {
 }
 
 function showFormInst(obj) {
-  console.log(obj, "obj");
-  let par = document.querySelector("#form_inst_created");
-  let newdate = new Date(obj.created);
-  let newStr =
-    newdate.toLocaleDateString() + ", " + newdate.toLocaleTimeString();
+  //console.log(obj, "obj");
+  if (obj) {
+    let par = document.querySelector("#form_inst_created");
+    let newdate = new Date(obj.created);
+    let newStr = newdate.toUTCString();
+    par.innerHTML = "";
+    let strhtml = ` <h4>Date: ${newStr}</h4> `;
+    let newPart = obj.answers
+      ? "<ul>" +
+        obj.answers.reduce(
+          (str, el) =>
+            str +
+            `<li>question: ${el.question.question}, answer: ${el.answer}</li>`,
+          ""
+        ) +
+        "</ul>"
+      : "";
 
-  par.innerHTML = "";
-  let strhtml = ` <h4>Date: ${newStr}</h4> `;
-  let newPart = obj.answers
-    ? "<ul>" +
-      obj.answers.reduce(
-        (str, el) =>
-          str +
-          `<li>question: ${el.question.question}, answer: ${el.answer}</li>`,
-        ""
-      ) +
-      "</ul>"
-    : "";
-
-  par.insertAdjacentHTML("beforeend", strhtml + newPart);
+    par.insertAdjacentHTML("beforeend", strhtml + newPart);
+  }
 }
 
 function onsubmitForm(e) {

@@ -54,7 +54,8 @@ export class ClientForms {
       .then((result) => {
         //console.log(result, "rels");
         func(result);
-      });
+      })
+      .catch((err) => console.log(err, "err_client"));
   }
 
   getFormInst(id, func) {
